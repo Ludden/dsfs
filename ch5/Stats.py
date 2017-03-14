@@ -108,12 +108,12 @@ def correlation(x, y):
 outlier = num_friends.index(100)
 
 num_friends_without_outlier = [x
-                    for i, x in enumerate(num_friends)
-                    if i != outlier]
+                               for i, x in enumerate(num_friends)
+                               if i != outlier]
 
 daily_minutes_without_outlier = [x
-                      for i, x in enumerate(daily_minutes)
-                      if i != outlier]
+                                 for i, x in enumerate(daily_minutes)
+                                 if i != outlier]
 
 print('mean:', mean(num_friends))
 print('med:', median(num_friends))
