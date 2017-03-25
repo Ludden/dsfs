@@ -1,3 +1,5 @@
+from __future__ import division
+
 import math
 import random
 
@@ -80,10 +82,61 @@ print(normal_upper_bound(0.95, mu_0, sigma_0))
 
 print(two_sided_p_value(529.5, mu_0, sigma_0))
 
-extreme_value_count = 0
-for _ in range(100000):
-    num_heads = sum(1 if random.random() < 0.5 else 0
-                    for _ in range(1000))
-    if num_heads >= 530 or num_heads <= 470:
-        extreme_value_count += 1
-print(extreme_value_count / 100000)
+
+# commented cause it's slow
+# extreme_value_count = 0
+# for _ in range(100000):
+#     num_heads = sum(1 if random.random() < 0.5 else 0
+#                     for _ in range(1000))
+#     if num_heads >= 530 or num_heads <= 470:
+#         extreme_value_count += 1
+# print(extreme_value_count / 100000)
+
+
+def run_experiment():
+    """flip a fair coin 1000 times, True = heads, False = tails"""
+    return [random.random() < 0.5 for _ in range(1000)]
+
+
+def reject_fairness(experiment):
+    """using the 5% significance levels"""
+    num_heads = len([flip for flip in experiment if flip])
+    return num_heads < 469 or num_heads > 531
+
+
+random.seed(0)
+experiments = [run_experiment() for _ in range(1000)]
+num_rejections = len([experiment
+                      for experiment in experiments
+                      if reject_fairness(experiment)])
+print(num_rejections)
+
+
+def estimated_parameters(N, n):
+    p = n / N
+    sigma = math.sqrt(p * (1 - p) / N)
+    return p, sigma
+
+
+def a_b_test_staticstic(N_A, n_A, N_B, n_B):
+    p_A, sigma_A = estimated_parameters(N_A, n_A)
+    p_B, sigma_B = estimated_parameters(N_B, n_B)
+    return (p_B - p_A) / math.sqrt(sigma_A ** 2 + sigma_B ** 2)
+
+
+z = a_b_test_staticstic(1000, 200, 1000, 180)
+print(z)
+print(two_sided_p_value(z))
+
+
+def B(alpha, beta):
+    """a normalizing constant so that the total probability is 1"""
+    return math.gamma(alpha) * math.gamma(beta) / math.gamma(alpha + beta)
+
+
+def beta_pdf(x, alpha, beta):
+    if x < 0 or x > 1:
+        return 0
+    return x ** (alpha - 1) * (1 - x) ** (beta - 1) / B(alpha, beta)
+
+
