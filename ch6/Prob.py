@@ -119,9 +119,9 @@ def make_hist(p, n, num_points):
 
     xs = range(min(data), max(data) + 1)
     ys = [normal_cdf(i + 0.5, mu, sigma) - normal_cdf(i - 0.5, mu, sigma) for i in xs]
-    plt.plot(xs, ys)
-    plt.title("Binomial distribution vs Normal approximation")
-    plt.show()
+    # plt.plot(xs, ys)
+    # plt.title("Binomial distribution vs Normal approximation")
+    # plt.show()
 
 
 make_hist(0.75, 100, 10000)
