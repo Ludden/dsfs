@@ -5,7 +5,7 @@ import random
 from functools import partial
 import matplotlib.pyplot as plt
 
-from ch4.VectFunc import distance
+from ch4.VectFunc import distance, scalar_multiply, vector_subtract
 
 
 def difference_quotient(f, x, h):
@@ -112,8 +112,50 @@ def negate_all(f):
 
 
 def maximize_batch(target_fn, gradient_fn, theta_0, tolerance=0.000001):
-    return minimize_batch(negate(target_fn,
+    return minimize_batch(negate(target_fn),
                                  negate_all(gradient_fn),
                                  theta_0,
-                                 tolerance))
+                                 tolerance)
+
+
+def in_random_order(data):
+    """generator that returns all the elements of data in random order"""
+    indexes = [i for i, _ in enumerate(data)]   # create a list of indexes
+    random.shuffle(indexes)                     # shuffle them
+    for i in indexes:
+        yield data[i]
+
+
+def minimize_stochastic(target_fn, gradient_fn, x, y, theta_0, alpha_0=0.01):
+    data = zip(x, y)
+    theta = theta_0                             # initial guess
+    alpha = alpha_0                             # initial step size
+    min_theta, min_value = None, float('inf')   # the minimum so far
+    iterations_with_no_improvement = 0
+
+    # if we ever go 100 iterations with no improvement, stop while iterations_with_no_improvement < 100:
+    while iterations_with_no_improvement < 100:
+        value = sum(target_fn(x_i, y_i, theta) for x_i, y_i in data)
+        if value < min_value:
+            # when we find a new minimum, remember it and go back to the original step size
+            min_theta, min_value = theta, value
+            iterations_with_no_improvement = 0
+            alpha = alpha_0
+        else:
+            # otherwise we're not improving, try shrinking the step size
+            iterations_with_no_improvement += 1
+            alpha *= 0.9
+
+        # take the gradient step for each of the data points
+        for x_i, y_i in in_random_order(data):
+            gradient_i = gradient_fn(x_i, y_i, theta)
+            theta = vector_subtract(theta, scalar_multiply(alpha, gradient_i))
+
+    return min_theta
+
+
+def maximize_stochastic(target_fn, gradient_fn, x, y, theta_0, alpha_0=0.01):
+    return minimize_stochastic(negate(target_fn),
+                               negate_all(gradient_fn),
+                               x, y, theta_0, alpha_0)
 
