@@ -7,10 +7,9 @@ import requests
 from bs4 import BeautifulSoup
 from time import sleep
 
-base_url = "http://shop.oreilly.com/category/browse-subjects/" + \
-           "data.do?sortby=publicationDate&page="
+base_url = "http://shop.oreilly.com/category/browse-subjects/data.do?sortby=publicationDate&page="
 books = []
-NUM_PAGES = 31
+NUM_PAGES = 44
 
 
 def is_video(td):
@@ -51,7 +50,7 @@ def get_year(book):
 
 
 year_counts = Counter(get_year(book) for book in books
-                      if get_year(book) <= 2016)
+                      if get_year(book) <= 2017)
 
 years = sorted(year_counts)
 book_counts = [year_counts[year] for year in years]
