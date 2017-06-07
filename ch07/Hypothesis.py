@@ -3,7 +3,7 @@ from __future__ import division
 import math
 import random
 
-from ch6.Prob import normal_cdf, inverse_normal_cdf
+from ch06.Prob import normal_cdf, inverse_normal_cdf
 
 
 def normal_approximation_to_binomial(n, p):

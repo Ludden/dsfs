@@ -5,7 +5,7 @@ import random
 from functools import partial
 import matplotlib.pyplot as plt
 
-from ch4.VectFunc import distance, scalar_multiply, vector_subtract
+from ch04.VectFunc import distance, scalar_multiply, vector_subtract
 
 
 def difference_quotient(f, x, h):

@@ -5,7 +5,7 @@ from collections import Counter
 import math
 from matplotlib import pyplot as plt
 
-from ch4.VectFunc import sum_of_squares, dot
+from ch04.VectFunc import sum_of_squares, dot
 
 num_friends1 = [100, 49, 41, 40, 25, 1, 4, 7, 4, 3, 3, 5, 6, 7, 5, 4, 34, 6, 47, 74, 3, 32, 2, 54, 6, 3, 2, 3, 2, 1, 2, 3, 5, 6, 7, 8, 2, 2, 3, 2, 2, 3, 2, 2,
                 1,

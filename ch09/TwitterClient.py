@@ -15,7 +15,7 @@ class TwitterStreamer(TwythonStreamer):
     def on_success(self, data):
         if data['lang'] == 'en':
             tweets.append(data)
-            print "received tweet #", len(tweets)
+            print "received tweet #", len(tweets), data
 
         if len(tweets) > 100:
             self.disconnect()
@@ -26,7 +26,7 @@ class TwitterStreamer(TwythonStreamer):
 
 
 stream = TwitterStreamer(key, secret, token, token_secret)
-stream.statuses.filter(track='data')
+stream.statuses.filter(track='sparksummit')
 stream.statuses.sample()
 
 top_hashtags = Counter(hashtag['text'].lower()
