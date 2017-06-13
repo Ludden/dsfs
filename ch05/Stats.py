@@ -28,15 +28,6 @@ daily_minutes = [1, 68.77, 51.25, 52.08, 38.36, 44.54, 57.13, 51.4, 41.42, 31.22
                  27.32, 18.23, 35.35, 28.48, 9.08, 24.62, 20.12, 35.26, 19.92, 31.02, 16.49, 12.16, 30.7, 31.22, 34.65, 13.13, 27.51, 33.2, 31.57, 14.1, 33.42,
                  17.44, 10.12, 24.42, 9.82, 23.39, 30.93, 15.03, 21.67, 31.09, 33.29, 22.61, 26.89, 23.48, 8.38, 27.81, 32.35, 23.84]
 
-friend_counts = Counter(num_friends)
-xs = range(101)
-ys = [friend_counts[x] for x in xs]
-plt.bar(xs, ys)
-plt.axis([0, 101, 0, 25])
-plt.title("Histogram of friend counts")
-plt.xlabel("# of friends")
-plt.ylabel("# of people")
-# plt.show()
 
 num_points = len(num_friends)
 sorted_values = sorted(num_friends)
@@ -115,17 +106,38 @@ daily_minutes_without_outlier = [x
                                  for i, x in enumerate(daily_minutes)
                                  if i != outlier]
 
-print('mean:', mean(num_friends))
-print('med:', median(num_friends))
-print('q10:', quantile(num_friends, 0.1))
-print('q25:', quantile(num_friends, 0.25))
-print('q75:', quantile(num_friends, 0.75))
-print('q90:', quantile(num_friends, 0.9))
-print('mode:', mode(num_friends))
-print('range:', data_range(num_friends))
-print('variance:', variance(num_friends))
-print('stddev:', std_dev(num_friends))
-print('interquartile range:', interquartile_range(num_friends))
-print('covariance:', covariance(num_friends, daily_minutes))
-print('correlation:', correlation(num_friends, daily_minutes))
-print('good correlation:', correlation(num_friends_without_outlier, daily_minutes_without_outlier))
+
+
+# friend_counts = Counter(num_friends)
+# xs = range(101)
+# ys = [friend_counts[x] for x in xs]
+# plt.bar(xs, ys)
+# plt.axis([0, 101, 0, 25])
+# plt.title("Histogram of friend counts")
+# plt.xlabel("# of friends")
+# plt.ylabel("# of people")
+# plt.show()
+
+
+# print('mean:', mean(num_friends))
+# print('med:', median(num_friends))
+# print('q10:', quantile(num_friends, 0.1))
+# print('q25:', quantile(num_friends, 0.25))
+# print('q75:', quantile(num_friends, 0.75))
+# print('q90:', quantile(num_friends, 0.9))
+# print('mode:', mode(num_friends))
+# print('range:', data_range(num_friends))
+# print('variance:', variance(num_friends))
+# print('stddev:', std_dev(num_friends))
+# print('interquartile range:', interquartile_range(num_friends))
+# print('covariance:', covariance(num_friends, daily_minutes))
+# print('correlation:', correlation(num_friends, daily_minutes))
+# print('good correlation:', correlation(num_friends_without_outlier, daily_minutes_without_outlier))
+
+
+
+
+
+
+
+

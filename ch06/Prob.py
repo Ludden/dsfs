@@ -49,7 +49,6 @@ def normal_pdf(x, mu=0, sigma=1):
     return math.exp(-(x - mu) ** 2 / 2 / sigma ** 2) / sqrt_two_pi * sigma
 
 
-xs = [x / 10.0 for x in range(-50, 50)]
 
 
 # plt.plot(xs, [normal_pdf(x, sigma=1) for x in xs], '-', label='mu=0,sigma=1')
@@ -124,4 +123,18 @@ def make_hist(p, n, num_points):
     # plt.show()
 
 
-make_hist(0.75, 100, 10000)
+
+# xs = [x / 10.0 for x in range(-50, 50)]
+# make_hist(0.75, 100, 10000)
+
+
+
+
+
+
+
+
+
+
+
+
